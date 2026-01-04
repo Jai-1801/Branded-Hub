@@ -1,8 +1,9 @@
-import { motion } from "framer-motion";
+import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
-export function Footer() {
+export const Footer = forwardRef<HTMLElement>((props, ref) => {
   return (
-    <footer className="bg-foreground text-primary-foreground py-20">
+    <footer ref={ref} className="bg-foreground text-primary-foreground py-20">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
@@ -17,16 +18,46 @@ export function Footer() {
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6">Shop</h4>
             <ul className="space-y-3">
-              {["New Arrivals", "Shoes", "Clothing", "Accessories", "Sale"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/collection"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  New Arrivals
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/collection"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Shoes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/collection"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Clothing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/collection"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Accessories
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/collection"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Sale
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -34,16 +65,46 @@ export function Footer() {
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6">Info</h4>
             <ul className="space-y-3">
-              {["About Us", "Stores", "Sustainability", "Careers", "Press"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/about"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Stores
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Sustainability
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors duration-300"
+                >
+                  Press
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -100,4 +161,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+Footer.displayName = "Footer";

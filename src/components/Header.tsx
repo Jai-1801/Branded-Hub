@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import { ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useCartStore } from "@/store/cartStore";
 
 interface HeaderProps {
   variant?: "light" | "dark";
 }
+
+const navItems = [
+  { title: "Collection", href: "/collection" },
+  { title: "Lookbook", href: "/lookbook" },
+  { title: "About", href: "/about" },
+];
 
 export function Header({ variant = "dark" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,28 +39,28 @@ export function Header({ variant = "dark" }: HeaderProps) {
         </button>
 
         <nav className="hidden lg:flex items-center gap-8">
-          {["Collection", "Lookbook", "About"].map((item) => (
-            <a
-              key={item}
-              href="#"
+          {navItems.map((item) => (
+            <Link
+              key={item.title}
+              to={item.href}
               className={`${textColor} text-xs tracking-[0.2em] uppercase hover:opacity-70 transition-opacity duration-300`}
             >
-              {item}
-            </a>
+              {item.title}
+            </Link>
           ))}
         </nav>
 
-        <a href="/" className={`font-display text-2xl ${textColor} tracking-wider`}>
+        <Link to="/" className={`font-display text-2xl ${textColor} tracking-wider`}>
           BRANDED HUB
-        </a>
+        </Link>
 
         <div className="flex items-center gap-6">
-          <a
-            href="#"
+          <Link
+            to="/collection"
             className={`hidden lg:block ${textColor} text-xs tracking-[0.2em] uppercase hover:opacity-70 transition-opacity duration-300`}
           >
             Search
-          </a>
+          </Link>
           <button
             onClick={openCart}
             className={`${textColor} relative p-2 -mr-2 hover:opacity-70 transition-opacity duration-300`}
@@ -80,14 +87,15 @@ export function Header({ variant = "dark" }: HeaderProps) {
         className="lg:hidden overflow-hidden bg-background"
       >
         <nav className="px-6 py-4 flex flex-col gap-4">
-          {["Collection", "Lookbook", "About", "Search"].map((item) => (
-            <a
-              key={item}
-              href="#"
+          {navItems.map((item) => (
+            <Link
+              key={item.title}
+              to={item.href}
+              onClick={() => setMenuOpen(false)}
               className="text-foreground text-sm tracking-[0.15em] uppercase hover:opacity-70 transition-opacity duration-300"
             >
-              {item}
-            </a>
+              {item.title}
+            </Link>
           ))}
         </nav>
       </motion.div>
