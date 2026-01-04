@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Collection from "./pages/Collection";
 import Lookbook from "./pages/Lookbook";
 import About from "./pages/About";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/collection" element={<Collection />} />
           <Route path="/lookbook" element={<Lookbook />} />
           <Route path="/about" element={<About />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

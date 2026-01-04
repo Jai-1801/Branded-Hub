@@ -1,19 +1,26 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cartStore";
 
 export function CartDrawer() {
-  const { 
-    items, 
-    isOpen, 
-    closeCart, 
-    removeItem, 
+  const navigate = useNavigate();
+  const {
+    items,
+    isOpen,
+    closeCart,
+    removeItem,
     updateQuantity,
-    getTotalPrice 
+    getTotalPrice
   } = useCartStore();
 
   const totalPrice = getTotalPrice();
+
+  const handleCheckout = () => {
+    closeCart();
+    navigate("/checkout");
+  };
 
   return (
     <AnimatePresence>
@@ -146,7 +153,7 @@ export function CartDrawer() {
                 <p className="text-muted-foreground text-xs">
                   Shipping and taxes calculated at checkout
                 </p>
-                <Button variant="hero" size="xl" className="w-full">
+                <Button variant="hero" size="xl" className="w-full" onClick={handleCheckout}>
                   Checkout
                 </Button>
                 <Button variant="minimal" className="w-full" onClick={closeCart}>

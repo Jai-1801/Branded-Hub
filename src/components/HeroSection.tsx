@@ -20,12 +20,12 @@ export function HeroSection({ onExplore }: HeroSectionProps) {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       className="relative h-screen w-full overflow-hidden"
     >
       {/* Background image with parallax */}
-      <motion.div 
+      <motion.div
         style={{ y: backgroundY }}
         className="absolute inset-0 w-full h-[120%]"
       >
@@ -77,39 +77,21 @@ export function HeroSection({ onExplore }: HeroSectionProps) {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-12 flex flex-col sm:flex-row gap-4"
         >
-          <Button 
-            variant="hero" 
+          <Button
+            variant="hero"
             size="xl"
             onClick={onExplore}
           >
             Shop Now
           </Button>
-          <Button 
-            variant="heroOutline" 
+          <Button
+            variant="heroOutline"
             size="xl"
             className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-foreground"
           >
             View Lookbook
           </Button>
         </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.button
-          onClick={onExplore}
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="text-primary-foreground/60 hover:text-primary-foreground transition-colors duration-300 flex flex-col items-center gap-2"
-        >
-          <span className="text-xs tracking-[0.2em] uppercase">Scroll</span>
-          <ChevronDown size={20} />
-        </motion.button>
       </motion.div>
 
       {/* Side text */}
