@@ -16,8 +16,8 @@ export const ProductCard = forwardRef<HTMLElement, ProductCardProps>(
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ 
-          duration: 0.8, 
+        transition={{
+          duration: 0.8,
           delay: index * 0.1,
           ease: [0.16, 1, 0.3, 1]
         }}
@@ -64,7 +64,7 @@ export const ProductCard = forwardRef<HTMLElement, ProductCardProps>(
             {product.name}
           </h3>
           <p className="text-muted-foreground text-sm">
-            ${product.price}
+            ₹{product.price.toLocaleString('en-IN')}
           </p>
         </div>
       </motion.article>

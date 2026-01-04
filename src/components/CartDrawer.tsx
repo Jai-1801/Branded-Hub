@@ -104,7 +104,7 @@ export function CartDrawer() {
                             Size: {item.size}
                           </p>
                           <p className="text-foreground text-sm mt-2">
-                            ${item.product.price}
+                            ₹{item.product.price.toLocaleString('en-IN')}
                           </p>
                         </div>
 
@@ -148,7 +148,7 @@ export function CartDrawer() {
               <div className="border-t border-border p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-foreground">Subtotal</span>
-                  <span className="text-foreground font-medium">${totalPrice}</span>
+                  <span className="text-foreground font-medium">₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
                 <p className="text-muted-foreground text-xs">
                   Shipping and taxes calculated at checkout

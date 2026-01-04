@@ -107,7 +107,7 @@ export function ProductDetail({ product, isOpen, onClose }: ProductDetailProps) 
                     {product.name}
                   </h2>
                   <p className="text-foreground text-2xl mb-6">
-                    ${product.price}
+                    ₹{product.price.toLocaleString('en-IN')}
                   </p>
                   <p className="text-muted-foreground leading-relaxed mb-8">
                     {product.description}
@@ -129,11 +129,10 @@ export function ProductDetail({ product, isOpen, onClose }: ProductDetailProps) 
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`min-w-[50px] h-12 border text-sm tracking-wide transition-all duration-300 ${
-                          selectedSize === size
+                        className={`min-w-[50px] h-12 border text-sm tracking-wide transition-all duration-300 ${selectedSize === size
                             ? "bg-foreground text-background border-foreground"
                             : "bg-transparent text-foreground border-border hover:border-foreground"
-                        }`}
+                          }`}
                       >
                         {size}
                       </button>
@@ -182,7 +181,7 @@ export function ProductDetail({ product, isOpen, onClose }: ProductDetailProps) 
                     className="w-full"
                     onClick={handleAddToCart}
                   >
-                    Add to Cart — ${product.price * quantity}
+                    Add to Cart — ₹{(product.price * quantity).toLocaleString('en-IN')}
                   </Button>
                 </motion.div>
               </div>

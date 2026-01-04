@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 interface HeroSectionProps {
@@ -9,6 +9,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onExplore }: HeroSectionProps) {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -88,6 +89,7 @@ export function HeroSection({ onExplore }: HeroSectionProps) {
             variant="heroOutline"
             size="xl"
             className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-foreground"
+            onClick={() => navigate("/lookbook")}
           >
             View Lookbook
           </Button>

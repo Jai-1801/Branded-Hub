@@ -11,19 +11,19 @@ export default function Checkout() {
   const navigate = useNavigate();
   const { items, getTotalPrice, clearCart } = useCartStore();
   const [isProcessing, setIsProcessing] = useState(false);
-  
+
   const totalPrice = getTotalPrice();
-  const shippingCost = totalPrice > 200 ? 0 : 15;
-  const tax = Math.round(totalPrice * 0.08 * 100) / 100;
+  const shippingCost = totalPrice > 5000 ? 0 : 199;
+  const tax = Math.round(totalPrice * 0.18 * 100) / 100;
   const grandTotal = totalPrice + shippingCost + tax;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
-    
+
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     clearCart();
     navigate("/order-success");
   };
@@ -31,7 +31,7 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
@@ -53,8 +53,8 @@ export default function Checkout() {
       <header className="border-b border-border bg-background/80 backdrop-blur-xl sticky top-0 z-40">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <button 
-              onClick={() => navigate(-1)} 
+            <button
+              onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <ChevronLeft size={20} />
@@ -79,7 +79,7 @@ export default function Checkout() {
           {/* Payment Form */}
           <div className="order-2 lg:order-1">
             <h2 className="font-display text-3xl mb-8 tracking-wide">PAYMENT DETAILS</h2>
-            
+
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Contact Information */}
               <div className="space-y-4">
@@ -204,10 +204,10 @@ export default function Checkout() {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
-                variant="hero" 
-                size="xl" 
+              <Button
+                type="submit"
+                variant="hero"
+                size="xl"
                 className="w-full"
                 disabled={isProcessing}
               >
@@ -221,7 +221,7 @@ export default function Checkout() {
                     Processing...
                   </span>
                 ) : (
-                  `Pay $${grandTotal.toFixed(2)}`
+                  `Pay ₹${grandTotal.toLocaleString('en-IN')}`
                 )}
               </Button>
             </form>
@@ -231,11 +231,11 @@ export default function Checkout() {
           <div className="order-1 lg:order-2">
             <div className="bg-secondary/30 p-8 sticky top-24">
               <h2 className="font-display text-2xl mb-6 tracking-wide">ORDER SUMMARY</h2>
-              
+
               {/* Items */}
               <div className="space-y-4 max-h-[300px] overflow-y-auto mb-6 pr-2">
                 {items.map((item) => (
-                  <motion.div 
+                  <motion.div
                     key={`${item.product.id}-${item.size}`}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -252,7 +252,7 @@ export default function Checkout() {
                       <h4 className="font-medium text-sm">{item.product.name}</h4>
                       <p className="text-muted-foreground text-xs mt-1">Size: {item.size}</p>
                       <p className="text-muted-foreground text-xs">Qty: {item.quantity}</p>
-                      <p className="text-foreground text-sm mt-2">${item.product.price * item.quantity}</p>
+                      <p className="text-foreground text-sm mt-2">₹{(item.product.price * item.quantity).toLocaleString('en-IN')}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -262,9 +262,9 @@ export default function Checkout() {
               <div className="flex items-center gap-2 text-accent text-xs mb-6 pb-6 border-b border-border">
                 <Truck size={14} />
                 {shippingCost === 0 ? (
-                  <span>Free shipping on orders over $200!</span>
+                  <span>Free shipping on orders over ₹5,000!</span>
                 ) : (
-                  <span>Add ${200 - totalPrice} more for free shipping</span>
+                  <span>Add ₹{(5000 - totalPrice).toLocaleString('en-IN')} more for free shipping</span>
                 )}
               </div>
 
@@ -272,19 +272,19 @@ export default function Checkout() {
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+                  <span>₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span>{shippingCost === 0 ? "Free" : `$${shippingCost.toFixed(2)}`}</span>
+                  <span>{shippingCost === 0 ? "Free" : `₹${shippingCost}`}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tax</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span className="text-muted-foreground">GST (18%)</span>
+                  <span>₹{tax.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-lg font-medium pt-3 border-t border-border">
                   <span>Total</span>
-                  <span>${grandTotal.toFixed(2)}</span>
+                  <span>₹{grandTotal.toLocaleString('en-IN')}</span>
                 </div>
               </div>
             </div>
